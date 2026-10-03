@@ -1,0 +1,5 @@
+outs:
+- md5: 1118628ca050304f420131601e2c13e1
+  size: 23274
+  hash: md5
+  path: ventas.csv

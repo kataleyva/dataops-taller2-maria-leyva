@@ -1,0 +1,5 @@
+entorno: dev
+almacenamiento: s3://datacorp-dev-datos
+datos: muestra_anonimizada
+porcentaje_muestra: 0.05
+instancia: t3.medium

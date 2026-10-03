@@ -1,0 +1,9 @@
+datos:
+  ruta: data/ventas.csv
+  columnas: [semana, precio_promedio, promocion, id_tienda, ventas]
+  max_porcentaje_nulos: 0.10
+modelo:
+  objetivo: ventas
+  umbral_mape: 15.0
+  mape_modelo_produccion: 12.1
+  ruta_salida: models/modelo_ventas.joblib

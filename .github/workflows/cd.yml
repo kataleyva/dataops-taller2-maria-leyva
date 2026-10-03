@@ -1,0 +1,97 @@
+name: CD Modelo de pronóstico de ventas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  PORCENTAJE_NULOS: "0"
+
+jobs:
+  build-test:
+    name: 1. Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Análisis estático
+        env:
+          PYTHONPATH: src
+        run: |
+          black --check src tests
+          pylint src --fail-under=8
+          bandit -r src -ll
+      - name: Pruebas unitarias
+        run: pytest -v
+
+  test-datos:
+    name: 2. Test de datos
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Obtener datos (simulado con datos sintéticos)
+        run: python src/generar_datos.py
+      - name: Validar calidad de datos
+        run: python src/validar_datos.py
+
+  train-validate:
+    name: 3. Train & Validate
+    needs: test-datos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python src/generar_datos.py
+      - run: python src/train_model.py
+      - run: python src/validate_model.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: modelo
+          path: |
+            models/
+            metrics/
+
+  empaquetado:
+    name: 4. Empaquetado
+    needs: train-validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: modelo
+      - name: Construir imagen Docker
+        run: docker build -t datacorp/modelo-ventas:${{ github.sha }} .
+
+  deploy-staging:
+    name: 5. Despliegue en Staging
+    needs: empaquetado
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - run: echo "Simulado - desplegando datacorp/modelo-ventas:${{ github.sha }} en Staging"
+
+  deploy-produccion:
+    name: 6. Despliegue en Producción
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - run: echo "Simulado - despliegue Canary (10 % del tráfico) en Producción"

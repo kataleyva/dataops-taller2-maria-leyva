@@ -1,0 +1,5 @@
+entorno: qa
+almacenamiento: s3://datacorp-staging-datos
+datos: snapshot_anonimizado
+porcentaje_muestra: 0.20
+instancia: t3.large

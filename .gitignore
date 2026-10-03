@@ -1,0 +1,16 @@
+# Datos: no se versionan en Git (se versiona su procedencia con DVC)
+data/*.csv
+# Modelos y métricas generadas
+models/
+metrics/
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+# Secretos
+.env

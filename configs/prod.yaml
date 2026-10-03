@@ -1,0 +1,5 @@
+entorno: prod
+base_de_datos: datacorp-prod-db
+datos: produccion
+despliegue: canary
+porcentaje_canary: 0.10
