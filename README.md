@@ -105,12 +105,12 @@ Impacto: Si la definición cambia sin control, no es posible recrear un modelo a
 dataops-taller2-maria-leyva/
 ├── README.md
 ├── .gitignore
-├── requirements.txt          # Dependencias con versión fija
+├── requirements.txt      
 ├── pytest.ini
-├── Dockerfile                # Empaquetado del modelo
+├── Dockerfile             
 ├── .github/workflows/
 │   ├── cd.yml              
-├── src/                      # Código
+├── src/             
 │   ├── config.py
 │   ├── generar_datos.py
 │   ├── validar_datos.py
@@ -118,22 +118,22 @@ dataops-taller2-maria-leyva/
 │   ├── validate_model.py
 │   └── sql/ventas_semanales.sql
 ├── notebooks/
-│   └── exploracion_ventas.ipynb # Notebook exportado a .py
-├── configs/                  # Configuraciones YAML
+│   └── exploracion_ventas.ipynb
+├── configs/                
 │   ├── modelo.yaml
 │   ├── dev.yaml
 │   ├── qa.yaml
 │   └── prod.yaml
 ├── pipelines/dags/
-│   └── pronostico_ventas_dag.py  # DAG de Airflow
+│   └── pronostico_ventas_dag.py 
 ├── infra/terraform/
-│   └── main.tf               # Infraestructura (Actividad 4)
+│   └── main.tf             
 ├── data/
-│   ├── ventas.csv.dvc        # Procedencia: hash de la versión de los datos
+│   ├── ventas.csv.dvc    
 │   └── PROCEDENCIA.md
 ├── tests/
 │   └── test_modelo.py
-└── docs/images/              # Diagramas
+└── docs/images/        
 ```
 Como definición de pipeline se usa GitHub Actions (`cd.yml`), que cumple el mismo rol que un Jenkinsfile.
 
