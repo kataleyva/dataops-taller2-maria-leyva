@@ -1,4 +1,6 @@
 # Parte II: Caso DataCorp Analytics
+En el siguiente taller, se utilizó IA para revisión de diagramas y guía en la definición de direcciones y campos, y
+para corrección de errores en la ejecución del código.
 
 ## Actividad 1: Diseño de Entornos Aislados
 
