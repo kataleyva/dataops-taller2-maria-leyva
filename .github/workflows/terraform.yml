@@ -1,0 +1,27 @@
+name: IaC - Validación de Terraform
+
+on:
+  push:
+    branches: [main]
+    paths: ["infra/**"]
+  pull_request:
+    paths: ["infra/**"]
+
+jobs:
+  validar:
+    name: Validar Terraform
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/terraform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: Formato
+        run: terraform fmt -check
+      - name: Inicializar (sin backend)
+        run: terraform init -backend=false
+      - name: Validar sintaxis
+        run: terraform validate
+      - name: Plan y apply (simulado)
+        run: echo "Simulado (Plan y apply requieren credenciales de AWS)"
