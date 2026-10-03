@@ -30,3 +30,9 @@ def test_modelo_con_datos_sinteticos_supera_el_umbral():
 def test_modelo_peor_que_produccion_no_se_promueve():
     assert not es_valido(18.2, 12.1, 15.0)
     assert es_valido(10.0, 12.1, 15.0)
+
+
+def test_ventas_negativas_falla():
+    datos = generar_ventas()
+    datos.loc[0, "ventas"] = -10
+    assert any("negativas" in error for error in validar(datos, COLUMNAS, 0.10))
