@@ -79,7 +79,7 @@ Validaciones:
 
 ### 2.3. Políticas de gobernanza
 
-1. Definición de cliente activo: Un cliente es activo si realizó al menos una compra en los últimos 6 meses en cualquier canal (tiendas o e-commerce). Asimismo, su fecha de corte es el último día de cada mes y las interacciones sin compra no lo convierten en un cliente en activo.
+1. Definición de cliente activo: Un cliente es activo si realizó al menos una compra en los últimos 12  meses en cualquier canal (tiendas o e-commerce). Asimismo, su fecha de corte es el último día de cada mes y las interacciones sin compra no lo convierten en un cliente en activo.
 
 2. Reglas de limpieza y duplicación: Para la limpieza, los documento se guarda sin puntos ni espacios. Por otro lado, los nombres se estandarizan en mayúscula inicial y sin espacios dobles. En el caso de los registros sin documento o sin consentimiento diligenciado se rechazan y se reportan a la fuente. Para la detección de duplicados: dos registros son el mismo cliente si tienen el mismo tipo y número de documento. Si hay un caso en que el documento no coincide pero el correo sí, el caso se marca como posible duplicado y es revisado por el equipo de calidad. Se debe conservar un único registro con una sola llave de cliente, mientras que, para cada atributo se toma el valor más reciente y completo.
 
@@ -318,4 +318,4 @@ Para finalizar, se requieren los siguientes recursos: En cuanto a personas, se r
 En conclusión, la inversión propuesta es moderada frente al costo de un nuevo incidente en producción o de perder a un cliente por desconfianza en los datos. 
 
 ### 6.4 Diagrama final
-![Flujo de un cambio entre entornos](docs/images/act5-4.png)
+![Flujo de un cambio entre entornos](docs/images/act6-4.png)
