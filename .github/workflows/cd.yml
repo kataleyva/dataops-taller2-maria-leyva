@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  PORCENTAJE_NULOS: "0"
+  PORCENTAJE_NULOS: "0.15"
 
 jobs:
   build-test:
